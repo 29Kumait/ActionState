@@ -1,6 +1,7 @@
 const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
 const FetchSignIn = async (formData) => {
+  "use server";
   try {
     const response = await fetch(`${BASE_SERVER_URL}/api/signin`, {
       method: "POST",
@@ -16,6 +17,7 @@ const FetchSignIn = async (formData) => {
 };
 
 async function FetchSignUp(formData) {
+  "use server";
   try {
     const response = await fetch(`${BASE_SERVER_URL}/api/signup`, {
       method: "POST",

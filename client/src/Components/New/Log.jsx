@@ -5,63 +5,60 @@ import styles from "../../styles.jsx";
 import { FetchSignIn } from "../Registers/FetchSign.server.jsx";
 
 export default function Log() {
-    const usernameRef = useRef(null);
-    const passwordRef = useRef(null);
-    const navigate = useNavigate();
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const navigate = useNavigate();
 
-    const [formState, loginAction, isPending] = useActionState(async () => {
+  const [formState, loginAction, isPending] = useActionState(async () => {
+    try {
+      const formData = {
+        username: usernameRef.current.value,
+        password: passwordRef.current.value,
+      };
+      const { token } = await FetchSignIn(formData);
+      if (!token) {
+        return { success: false, message: "Login failed" };
+      }
+      setTimeout(() => {
+        navigate("/page-login-again");
+      }, 2000);
 
-        try {
-            const formData = {
-                username: usernameRef.current.value,
-                password: passwordRef.current.value,
-            };
-            const { token } = await FetchSignIn(formData);
-            if (!token) {
-                return { success: false, message: "Login failed" };
-            }
-            setTimeout(() => {
-                navigate("/page-login-again");
-            }, 2000);
+      return { success: true, message: "Logged in successfully" };
+    } catch (error) {
+      return { success: false };
+    }
+  });
 
-            return { success: true, message: "Logged in successfully" };
-        } catch (error) {
-            return { success: false};
-        }
-    });
+  return (
+    <div>
+      <input
+        ref={usernameRef}
+        type="text"
+        name="username"
+        required
+        disabled={isPending}
+      />
+      <input
+        ref={passwordRef}
+        type="password"
+        name="password"
+        required
+        disabled={isPending}
+      />
+      <button
+        onClick={loginAction}
+        disabled={isPending}
+        {...stylex.props(styles.button)}
+      >
+        In
+      </button>
 
-    return (
-        <div>
-            <input
-                ref={usernameRef}
-                type="text"
-                name="username"
-                required
-                disabled={isPending}
-            />
-            <input
-                ref={passwordRef}
-                type="password"
-                name="password"
-                required
-                disabled={isPending}
-            />
-            <button
-                onClick={loginAction}
-                disabled={isPending}
-                {...stylex.props(styles.button)}
-            >
-                In
-            </button>
-
-            <p>State: {JSON.stringify(formState)}</p>
-            {formState?.message && <p> {formState.message}</p>}
-            <p> {formState?.message ?? 'State'}</p>
-        </div>
-    );
+      <p>State: {JSON.stringify(formState)}</p>
+      {formState?.message && <p> {formState.message}</p>}
+      <p> {formState?.message ?? "State"}</p>
+    </div>
+  );
 }
-
-
 
 // import {  useTransition, useRef } from "react";
 // import { useNavigate } from "react-router-dom";
@@ -114,10 +111,6 @@ export default function Log() {
 //     );
 // }
 // export default Log;
-
-
-
-
 
 // import { useActionState, useTransition, useRef } from "react";
 // import { useNavigate } from "react-router-dom";
@@ -183,7 +176,6 @@ export default function Log() {
 //         </div>
 //     );
 // }
-
 
 //
 // import { useActionState, useTransition, useRef } from "react";
