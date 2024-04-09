@@ -1,14 +1,14 @@
 {
   "name": "react-19",
   "version": "1.0.0",
-  "description": "A modern React web application with a Node.js server backend.",
+  "description": "A modern React web application with a Node.js Server backend.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run start --prefix server\" \"npm run start --prefix client\"",
-    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
-    "install-all": "npm install && npm run install-server && npm run install-client",
-    "install-server": "cd server && npm install",
+    "start": "concurrently \"npm run start --prefix Server\" \"npm run start --prefix client\"",
+    "dev": "concurrently \"npm run dev --prefix Server\" \"npm run dev --prefix client\"",
+    "install-all": "npm install && npm run install-Server && npm run install-client",
+    "install-Server": "cd Server && npm install",
     "install-client": "cd client && npm install",
     "lint": "eslint '**/*.js'",
     "build": "npm run build --prefix client"
