@@ -9,7 +9,7 @@ export default function Log() {
     const passwordRef = useRef(null);
     const navigate = useNavigate();
 
-    const [formState, loginAction, isPending] = useActionState(action ,async () => {
+    const [formState, loginAction, isPending] = useActionState(async () => {
 
         try {
             const formData = {
