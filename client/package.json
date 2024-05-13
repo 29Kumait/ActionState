@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@stylexjs/stylex": "^0.5.1",
-    "react": "^19.0.0-canary-4c12339ce-20240408",
-    "react-dom": "^19.0.0-canary-4c12339ce-20240408",
+    "react": "^19.0.0-beta-04b058868c-20240508",
+    "react-dom": "^19.0.0-beta-04b058868c-20240508",
     "vite-plugin-stylex": "^0.8.2"
   },
   "devDependencies": {
