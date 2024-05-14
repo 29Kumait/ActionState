@@ -11,7 +11,8 @@
     "install-Server": "cd Server && npm install",
     "install-client": "cd client && npm install",
     "lint": "eslint '**/*.js'",
-    "build": "npm run build --prefix client"
+    "build": "npm run build --prefix client",
+    "deploy":"npm run deploy"
   },
   "keywords": [
     "react",
