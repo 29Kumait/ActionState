@@ -1,0 +1,42 @@
+<configuration debug="true">
+
+    <property scope="system" name="LOG_FILE_DIR" value="${SPACE_WORKER_LOG_FILE_DIR:-%skip%}" />
+    <property scope="system" name="LOG_FILE_SIZE" value="${SPACE_WORKER_LOG_FILE_SIZE:-10MB}"/>
+    <property scope="system" name="LOG_FILE_HISTORY" value="${SPACE_WORKER_LOG_FILE_HISTORY_COUNT:-3}"/>
+    <property scope="system" name="LOG_TOTAL_SIZE" value="${SPACE_WORKER_LOG_FILE_TOTAL_SIZE:-20GB}"/>
+    <property scope="system" name="LOG_LEVEL" value="${SPACE_WORKER_LOG_LEVEL:-INFO}"/>
+
+    <if condition='property("LOG_FILE_DIR").equals("%skip%")'>
+        <then>
+            <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+                <encoder>
+                    <pattern>%d{HH:mm:ss.SSS} %-5level %msg%n</pattern>
+                </encoder>
+            </appender>
+
+            <root level="${LOG_LEVEL}">
+                <appender-ref ref="STDOUT"/>
+            </root>
+        </then>
+        <else>
+            <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>${LOG_FILE_DIR}/automation-worker.log</file>
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                    <pattern>%d{HH:mm:ss.SSS} %-5level %msg%n</pattern>
+                </encoder>
+
+                <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                    <!-- rollover daily -->
+                    <fileNamePattern>${LOG_FILE_DIR}/automation-worker.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+                    <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+                    <maxFileSize>${LOG_FILE_SIZE}</maxFileSize>
+                    <maxHistory>${LOG_FILE_HISTORY}</maxHistory>
+                    <totalSizeCap>${LOG_TOTAL_SIZE}</totalSizeCap>
+                </rollingPolicy>
+            </appender>
+            <root level="${LOG_LEVEL}">
+                <appender-ref ref="FILE" />
+            </root>
+        </else>
+    </if>
+</configuration>

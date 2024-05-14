@@ -1,0 +1,2 @@
+JAVA_VERSION="17.0.5"
+MODULES="java.base java.logging java.security.sasl java.naming java.net.http java.xml jdk.crypto.ec jdk.jdwp.agent jdk.unsupported"
