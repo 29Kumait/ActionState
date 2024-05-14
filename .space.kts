@@ -1,17 +1,11 @@
-job("Deploy on push") {
-    container(displayName = "Node.js", image = "node:14") {
-        shellScript {
-            content = """
-                npm install
-                npm run build
-                npm run deploy
-            """
-        }
-    }
-
-    triggers {
-        onPush {
-            branchFilter = "+:main"
-        }
+container("amazoncorretto:17-alpine") {
+    kotlinScript { api ->
+        api.space().projects.automation.deployments.start(
+            project = api.projectIdentifier(),
+            targetIdentifier = TargetIdentifier.Key("new-deployment-target"),
+            version = "1.0.0",
+            // automatically update deployment status based on a status of a job
+            syncWithAutomationJob = true
+        )
     }
 }
