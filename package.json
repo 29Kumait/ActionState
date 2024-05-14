@@ -29,9 +29,5 @@
   "devDependencies": {
     "concurrently": "^8.2.2",
     "eslint": "^7.32.0"
-  },
-  "dependencies": {
-    "react": "^19.0.0-beta-26f2496093-20240514",
-    "react-dom": "^19.0.0-beta-26f2496093-20240514"
   }
 }
