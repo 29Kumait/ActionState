@@ -2,13 +2,22 @@ import { useFormStatus } from "react-dom";
 import stylex from "@stylexjs/stylex";
 import styles from "../../styles.jsx";
 import actionDelay from "./ActionDelay.jsx";
+import { Link } from "react-router-dom";
 
 function Submit() {
   const status = useFormStatus();
   return (
-    <button disabled={status.pending} {...stylex.props(styles.button)}>
-      {status.pending ? "Submitting..." : "Submit"}
-    </button>
+    <div>
+      <button disabled={status.pending} {...stylex.props(styles.button)}>
+        {status.pending ? "Submitting..." : "Submit"}
+      </button>
+
+      <Link to="/home-page">
+        <button disabled={status.pending} {...stylex.props(styles.button)}>
+          {status.pending ? "Submitting..." : "Submit"}
+        </button>
+      </Link>
+    </div>
   );
 }
 
