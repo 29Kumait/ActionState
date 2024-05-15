@@ -3,7 +3,8 @@ import * as stylex from "@stylexjs/stylex";
 import styles from "./styles.jsx";
 import Page from "./Pages/Page.jsx";
 import PageLogin from "./Pages/PageLogin.jsx";
-import PageLoginAgain from "./Pages/PageLoginAgain.jsx"
+import PageLoginAgain from "./Pages/PageLoginAgain.jsx";
+import HomePage from "./Pages/HomePage.tsx";
 
 const styleApp = stylex.create({
   text: {
@@ -37,6 +38,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Page />} />
+          <Route path="/home-page" element={<HomePage />} />
           <Route path="/page-login" element={<PageLogin />} />
           <Route path="/page-login-again" element={<PageLoginAgain />} />
         </Routes>
