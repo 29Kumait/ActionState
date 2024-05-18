@@ -32,7 +32,9 @@ const styles = stylex.create({
   },
 });
 
-const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+const Layout: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
+  children,
+}) => {
   return (
     <div {...stylex.props(styles.container)}>
       <header {...stylex.props(styles.header)}>
